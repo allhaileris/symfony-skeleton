@@ -1,0 +1,10 @@
+services:
+
+  php-roadrunner:
+    container_name: ${APP_DOCKER_TAG}
+    platform: linux/amd64
+    image: ${APP_DOCKER_TAG}
+    volumes:
+      - .:/opt/app:rw
+    ports:
+      - "8000:8000"

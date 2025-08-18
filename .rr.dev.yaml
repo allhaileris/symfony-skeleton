@@ -6,7 +6,7 @@ server:
     - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
 
 http:
-  address: 0.0.0.0:8080
+  address: 0.0.0.0:8000
   middleware: [ "static", "gzip" ]
   pool:
     debug: true
