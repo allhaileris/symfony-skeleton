@@ -26,3 +26,12 @@ logs:
       mode: raw
     metrics:
       level: debug
+
+service:
+    postgres:
+        command: "postgres -D .data/postgres" # The command to execute
+        processNum: 1 # Number of processes to run
+        execTimeout: 0 # Execution timeout (0 for no timeout)
+        remainAfterExit: false # Whether to keep the service running after exit
+        env:
+            APP_ENV: "production"

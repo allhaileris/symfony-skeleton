@@ -1,7 +1,9 @@
 .git
 .idea
 .vscode
+.data
 bin/rr
+bin/phpunit
 var
 vendor
 .dockerignore
@@ -11,4 +13,5 @@ vendor
 .gitignore
 Dockerfile
 Makefile
+phpunit.dist.xml
 shell.nix

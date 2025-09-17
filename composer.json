@@ -8,6 +8,10 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "baldinof/roadrunner-bundle": "^3.2",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.16",
+        "doctrine/doctrine-migrations-bundle": "^3.4",
+        "doctrine/orm": "^3.5",
         "spiral/roadrunner-cli": "^2.7",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
@@ -71,6 +75,7 @@
         "phpunit/phpunit": "^11.5",
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",
+        "symfony/maker-bundle": "^1.64",
         "symfony/stopwatch": "7.3.*",
         "symfony/web-profiler-bundle": "7.3.*"
     }

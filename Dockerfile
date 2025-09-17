@@ -17,13 +17,7 @@ RUN if [ "$APP_ENV" = "dev" ]; \
 FROM alpine
 ARG APP_ENV=${APP_ENV}
 RUN apk add --no-cache --update \
-    php82 \
-    php82-curl \
-    php82-session \
-    php82-dom \
-    php82-simplexml \
-    php82-gd \
-    php82-intl \
+    php82 php82-curl php82-session php82-dom php82-simplexml php82-gd php82-intl \
     php82-ctype \
     php82-zip \
     php82-tokenizer \
