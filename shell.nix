@@ -34,14 +34,18 @@ pkgs.mkShell {
   inherit packages;
 
   shellHook = ''
-    # https://yannesposito.com/posts/0024-replace-docker-compose-with-nix-shell/index.html
-    if [ ! -d var/log ]; then
-       mkdir -p var/log
+    export COMPOSER_CACHE_DIR=$(pwd)/var/cache/composer
+    mkdir -p $(pwd)/var/cache/composer
+
+    if [ ! -d $(pwd)/var/log ]; then
+       mkdir -p $(pwd)/var/log
     fi
+
+    # https://yannesposito.com/posts/0024-replace-docker-compose-with-nix-shell/index.html
     if [ ! -d ${postgresDirectory} ]; then
       mkdir -p ${postgresDirectory}
       initdb -D ${postgresDirectory}
-      pg_ctl -D ${postgresDirectory} -l var/log/postgres.log -o "--unix_socket_directories='$PWD'" start
+      pg_ctl -D ${postgresDirectory} -l $(pwd)/var/log/postgres.log -o "--unix_socket_directories='$PWD'" start
       createdb app
       pg_ctl -D ${postgresDirectory} stop
     fi
