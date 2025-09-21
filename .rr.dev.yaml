@@ -1,37 +1,55 @@
 version: "3"
 
 server:
-  command: "php public/index.php"
-  env:
-    - APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
+    command: "php public/index.php"
+    env:
+        -   APP_RUNTIME: Baldinof\RoadRunnerBundle\Runtime\Runtime
 
 http:
-  address: 0.0.0.0:8000
-  middleware: [ "static", "gzip" ]
-  pool:
-    debug: true
-  uploads:
-    forbid: [ ".php", ".exe", ".bat" ]
-  static:
-    dir: "public"
-    forbid: [ ".php", ".htaccess" ]
+    address: 0.0.0.0:8000
+    middleware: [ "static", "gzip" ]
+    pool:
+        debug: true
+    uploads:
+        forbid: [ ".php", ".exe", ".bat" ]
+    static:
+        dir: "public"
+        forbid: [ ".php", ".htaccess" ]
+
+rpc:
+    listen: tcp://127.0.0.1:6001
 
 logs:
-  mode: development
-  channels:
-    http:
-      level: debug # Log all http requests, set to info to disable
-    server:
-      level: info # Everything written to worker stderr is logged
-      mode: raw
-    metrics:
-      level: debug
+    mode: development
+    channels:
+        http:
+            level: debug # Log all http requests, set to info to disable
+        server:
+            level: info # Everything written to worker stderr is logged
+            mode: raw
+        metrics:
+            level: debug
 
 service:
     postgres:
         command: "postgres -D .data/postgres" # The command to execute
+        service_name_in_log: true
         processNum: 1 # Number of processes to run
         execTimeout: 0 # Execution timeout (0 for no timeout)
         remainAfterExit: false # Whether to keep the service running after exit
         env:
             APP_ENV: "production"
+    rabbitmq:
+        command: "rabbitmq-server" # The command to execute
+        service_name_in_log: true
+        processNum: 1 # Number of processes to run
+        execTimeout: 0 # Execution timeout (0 for no timeout)
+        remainAfterExit: false # Whether to keep the service running after exit
+        env:
+            APP_ENV: "production"
+    messenger:
+        command: "./messenger.sh"
+        service_name_in_log: true
+        processNum: 1
+        execTimeout: 0 # Execution timeout (0 for no timeout)
+        remainAfterExit: false # Whether to keep the service running after exit

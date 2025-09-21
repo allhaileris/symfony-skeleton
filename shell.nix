@@ -16,6 +16,7 @@ let
             enabled
             ++ (with all; [
               xdebug
+              amqp
             ])
           );
         }
@@ -23,11 +24,13 @@ let
     in
     [
       pkgs.postgresql_16
+      pkgs.rabbitmq-server
       pkgs.nixfmt-rfc-style
       pkgs.gnumake
       phpForRuntimeWithXDebug
       pkgs.php82Extensions.curl
-      pkgs.php82Packages.composer
+      # composer check-platform-reqs
+      (pkgs.php82.withExtensions ({ enabled, all }: enabled ++ [ all.amqp ])).packages.composer
     ];
 in
 pkgs.mkShell {
@@ -35,6 +38,10 @@ pkgs.mkShell {
 
   shellHook = ''
     export COMPOSER_CACHE_DIR=$(pwd)/var/cache/composer
+    export RABBITMQ_CONFIG_FILE=$(pwd)/.dev/rabbitmq.conf
+    export RABBITMQ_MNESIA_BASE=$(pwd)/.data/rabbitmq
+    export RABBITMQ_LOGS=$(pwd)/var/log/rabbitmq.log
+
     mkdir -p $(pwd)/var/cache/composer
 
     if [ ! -d $(pwd)/var/log ]; then
