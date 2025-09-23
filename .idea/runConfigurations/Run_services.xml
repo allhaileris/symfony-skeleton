@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run services" type="docker-deploy" factoryName="docker-compose.yml" folderName="Run" server-name="Docker">
+    <deployment type="docker-compose.yml">
+      <settings>
+        <option name="envFilePath" value=".env" />
+        <option name="sourceFilePath" value="compose.yaml" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>

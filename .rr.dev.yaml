@@ -31,25 +31,11 @@ logs:
             level: debug
 
 service:
-    postgres:
-        command: "postgres -D .data/postgres" # The command to execute
-        service_name_in_log: true
-        processNum: 1 # Number of processes to run
-        execTimeout: 0 # Execution timeout (0 for no timeout)
-        remainAfterExit: false # Whether to keep the service running after exit
-        env:
-            APP_ENV: "production"
-    rabbitmq:
-        command: "rabbitmq-server" # The command to execute
-        service_name_in_log: true
-        processNum: 1 # Number of processes to run
-        execTimeout: 0 # Execution timeout (0 for no timeout)
-        remainAfterExit: false # Whether to keep the service running after exit
-        env:
-            APP_ENV: "production"
     messenger:
-        command: "./messenger.sh"
+        command: "php bin/console messenger:consume async -vvvv"
         service_name_in_log: true
         processNum: 1
-        execTimeout: 0 # Execution timeout (0 for no timeout)
-        remainAfterExit: false # Whether to keep the service running after exit
+        execTimeout: 0
+        remainAfterExit: false
+        env:
+            APP_ENV: "dev"

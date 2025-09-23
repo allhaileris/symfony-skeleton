@@ -69,8 +69,7 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
-            "@auto-scripts",
-            "vendor/bin/rr get --location bin/"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"

@@ -1,10 +1,26 @@
 services:
-
-  php-roadrunner:
-    container_name: ${APP_DOCKER_TAG}
-    platform: linux/amd64
-    image: ${APP_DOCKER_TAG}
-    volumes:
-      - .:/opt/app:rw
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "8000:8000"
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+    volumes:
+      - ${PWD}/.data/postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+  redis:
+    image: redis:8.2
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ${PWD}/.data/redis:/data
+    command: redis-server --appendonly yes # Starts Redis with AOF persistence enabled
+    restart: unless-stopped
