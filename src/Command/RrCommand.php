@@ -39,7 +39,7 @@ class RrCommand extends Command
                     'command' => $serviceGroupName,
                     'memory' => $serviceInstance['memory_usage'],
 
-                    'error' => $serviceInstance['error']
+                    'error' => !empty($serviceInstance['error'])
                         ? $serviceInstance['error']['message']
                         : null,
                 ];

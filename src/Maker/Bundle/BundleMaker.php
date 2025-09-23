@@ -55,9 +55,8 @@ final class BundleMaker extends AbstractMaker
             );
     }
 
-    public function configureDependencies(DependencyBuilder $dependencies)
+    public function configureDependencies(DependencyBuilder $dependencies): void
     {
-        // TODO: Implement configureDependencies() method.
     }
 
     private function createBundleFile(Generator $generator, string $bundleName): void

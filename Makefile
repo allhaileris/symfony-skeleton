@@ -4,6 +4,9 @@ DOCKER_BUILD_COMMAND=docker build --file Dockerfile --no-cache --platform linux/
 run:
 	 $(PWD)/bin/rr -c .rr.dev.yaml serve
 
+stan:
+	vendor/bin/phpstan analyse src
+
 up:
 	$(DOCKER_BUILD_COMMAND) --build-arg APP_ENV=dev .
 	docker compose --env-file .env up -d
