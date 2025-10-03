@@ -11,6 +11,7 @@
 
 ###> baldinof/roadrunner-bundle ###
 /bin/rr
+/rr
 ###< baldinof/roadrunner-bundle ###
 
 ###> phpunit/phpunit ###
