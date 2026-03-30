@@ -1,13 +1,12 @@
 include .env
 DOCKER_BUILD_COMMAND=docker build --file Dockerfile --no-cache --platform linux/amd64 --tag $(APP_DOCKER_TAG)
 
-run:
-	 $(PWD)/rr -c .rr.dev.yaml serve
+dev:
+	$(DOCKER_BUILD_COMMAND) --build-arg APP_ENV=dev .
+
+prod:
+	$(DOCKER_BUILD_COMMAND) --build-arg APP_ENV=prod .
 
 stan:
 	vendor/bin/phpstan analyse src
-
-up:
-	$(DOCKER_BUILD_COMMAND) --build-arg APP_ENV=dev .
-	docker compose --env-file .env up -d
 

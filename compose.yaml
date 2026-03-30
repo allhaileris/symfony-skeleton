@@ -1,4 +1,9 @@
 services:
+  app:
+    image: ${APP_DOCKER_TAG}
+    ports:
+      - "8000:8000"
+
   postgres:
     image: postgres:17-alpine
     environment:
